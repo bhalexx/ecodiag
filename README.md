@@ -2,7 +2,7 @@
 
 ### CONTEXTE
 
-This repository contains a ready-to-go dockerized Angular & Symfony
+This repository contains a ready-to-go dockerized Angular & Symfony application.
 
 ### TECHNICAL
 
