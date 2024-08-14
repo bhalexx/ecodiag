@@ -1,0 +1,21 @@
+services:
+    maildev:
+        image: maildev/maildev
+        ports:
+            - ${MAILDEV_PORT}:80
+        command: maildev --hide-extensions STARTTLS --web 80 --smtp 25
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            PMA_HOST: mariadb
+            PMA_ARBITRARY: 1
+        links:
+            - mariadb
+        volumes:
+            - ./.docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+        ports:
+            - ${PMA_PORT}:80
