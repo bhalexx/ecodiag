@@ -1,7 +1,7 @@
 DC=docker compose
 PROJECT_DIR=/symfony
 RUN=$(DC) run --rm
-RUN_SERVER=$(RUN) -w $(PROJECT_DIR)/server
+RUN_SERVER=$(RUN) -w $(PROJECT_DIR)/api
 EXEC=$(DC) exec
 SERVER_CONSOLE=$(EXEC) php server/bin/console
 PASS_PHRASE?=ecodiag
