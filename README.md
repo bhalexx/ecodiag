@@ -1,2 +1,2 @@
 # ECODIAG
-A green project.
+A green project 🌱🌿 🫧🍃
