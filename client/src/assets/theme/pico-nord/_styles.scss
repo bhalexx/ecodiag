@@ -48,11 +48,21 @@
         #{$css-var-prefix}typography-spacing-vertical: 1rem;
     }
 
+    // Spacings for nav element
+    @if map.get($modules, "components/nav") {
+        #{$css-var-prefix}modal-overlay-backdrop-filter: blur(.375rem);
+        #{$css-var-prefix}nav-element-spacing-vertical: 1rem;
+        #{$css-var-prefix}nav-element-spacing-horizontal: .5rem;
+        #{$css-var-prefix}nav-link-spacing-vertical: .5rem;
+        #{$css-var-prefix}nav-link-spacing-horizontal: .5rem;
+        #{$css-var-prefix}nav-breadcrumb-divider: ">";
+    }
+
     // Spacings for body > header, body > main, body > footer, section, article
     @if map.get($modules, "layout/landmarks") or
-    map.get($modules, "layout/section") or
-    map.get($modules, "components/card") or
-    map.get($modules, "components/modal")
+        map.get($modules, "layout/section") or
+        map.get($modules, "components/card") or
+        map.get($modules, "components/modal")
     {
         #{$css-var-prefix}block-spacing-vertical: calc(var(#{$css-var-prefix}spacing) * 1.5);
         #{$css-var-prefix}block-spacing-horizontal: calc(var(#{$css-var-prefix}spacing) * 1.5);
@@ -77,8 +87,8 @@
 
     // Chevron icons
     @if map.get($modules, "forms/basics") or
-    map.get($modules, "components/accordion") or
-    map.get($modules, "components/dropdown")
+        map.get($modules, "components/accordion") or
+        map.get($modules, "components/dropdown")
     {
         #{$css-var-prefix}icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='#{functions.display-rgb($nord4)}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     }

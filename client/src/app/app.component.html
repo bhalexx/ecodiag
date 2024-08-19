@@ -1,105 +1,18 @@
-<header class="container-fluid">
-    <h1>Styleguide</h1>
-</header>
+<nav class="container-fluid">
+    <ul>
+        <li><a routerLink="/"><strong>🌱 Ecodiag</strong></a></li>
+    </ul>
+    <ul>
+        <li><a routerLink="/styleguide">Styleguide</a></li>
+        <li class="pointer" (click)="toggleTheme()">
+            @if (isLightTheme) {
+                <span class="contrast" aria-label="Activer le mode sombre" data-discover="true">🌙</span>
+            } @else {
+                <span class="contrast" aria-label="Activer le mode clair" data-discover="true">☀️</span>
+            }
+        </li>
+    </ul>
+</nav>
 <main class="container-fluid">
-    <div class="grid">
-        <article>
-            <header>Typography</header>
-            <h1>Heading 1</h1>
-            <h2>Heading 2</h2>
-            <h3>Heading 3</h3>
-            <h4>Heading 4</h4>
-            <h5>Heading 5</h5>
-            <h6>Heading 6</h6>
-        </article>
-        <article>
-            <header>Switch button</header>
-            <fieldset>
-                <label>
-                    <input name="terms" type="checkbox" role="switch" />
-                    I agree to the Terms
-                </label>
-                <label>
-                    <input name="opt-in" type="checkbox" role="switch" checked />
-                    Receive news and offers
-                </label>
-            </fieldset>
-
-            <fieldset>
-                <label>
-                    <input name="2fa" type="checkbox" role="switch" aria-invalid="false" />
-                    Enable two-factor authentication
-                </label>
-                <label>
-                    <input name="subscription" type="checkbox" role="switch" aria-invalid="true" />
-                    Automatic subscription renewal
-                </label>
-            </fieldset>
-        </article>
-        <article>
-            <header>Inputs</header>
-            <input type="text" name="text" placeholder="Text" aria-label="Text">
-            <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email">
-            <input type="number" name="number" placeholder="Number" aria-label="Number">
-            <input type="text" name="valid" value="Valid" aria-invalid="false">
-            <input type="text" name="invalid" value="Invalid" aria-invalid="true">
-
-            <details class="dropdown">
-                <summary>Dropdown</summary>
-                <ul>
-                    <li><a href="#">Solid</a></li>
-                    <li><a href="#">Liquid</a></li>
-                    <li><a href="#">Gas</a></li>
-                    <li><a href="#">Plasma</a></li>
-                </ul>
-            </details>
-        </article>
-        <article>
-            <header>Other form components</header>
-            <fieldset>
-                <legend>Language preferences:</legend>
-                <label>
-                    <input type="checkbox" name="english" checked />
-                    English
-                </label>
-                <label>
-                    <input type="radio" name="language" />
-                    French
-                </label>
-                <label>
-                    <input type="checkbox" name="valid" aria-invalid="false" />
-                    Valid
-                </label>
-                <label>
-                    <input type="checkbox" name="invalid" aria-invalid="true" />
-                    Invalid
-                </label>
-                <label aria-disabled="true">
-                    <input type="checkbox" name="dothraki" disabled />
-                    Dothraki
-                </label>
-            </fieldset>
-
-            <label>
-                Brightness
-                <input type="range" />
-            </label>
-
-            <fieldset>
-                <legend>Language preferences:</legend>
-                <input type="checkbox" id="hindi" name="hindi" checked />
-                <label htmlFor="hindi">Hindi</label>
-                <input type="checkbox" id="swahili" name="swahili" />
-                <label for="swahili" htmlFor="swahili">Swahili</label>
-                <input type="checkbox" id="navi" name="navi" disabled />
-                <label htmlFor="navi" aria-disabled="true">Na'vi</label>
-            </fieldset>
-
-            <div role="group">
-                <button>Button</button>
-                <button class="secondary">Button</button>
-                <button class="contrast">Button</button>
-            </div>
-        </article>
-    </div>
+    <router-outlet />
 </main>

@@ -40,7 +40,7 @@
         "components/group": false,
         "components/loading": false,
         "components/modal": false,
-        "components/nav": false,
+        "components/nav": true,
         "components/progress": false,
         "components/tooltip": false,
 
@@ -50,3 +50,5 @@
     ),
 );
 @use "assets/theme/pico-nord";
+
+@import 'assets/common';
