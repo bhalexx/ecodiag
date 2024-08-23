@@ -43,6 +43,10 @@
     // Spacings
     #{$css-var-prefix}spacing: 1rem;
 
+    // Grid gap
+    #{$css-var-prefix}grid-column-gap: 1rem;
+    #{$css-var-prefix}grid-row-gap: 1rem;
+
     // Spacings for typography elements
     @if map.get($modules, "content/typography") {
         #{$css-var-prefix}typography-spacing-vertical: 1rem;
