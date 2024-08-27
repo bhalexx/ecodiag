@@ -1,8 +1,17 @@
-{{  category.name }}
-
+<h1>{{  category.name }}</h1>
+<p>{{ category.description }}</p>
 @for (criteria of categoryCriteria; track $index) {
-    <article>
-        <header>{{ criteria.label }}</header>
-        {{ criteria.purpose }}
-    </article>
+    <details>
+        <summary role="button">{{ criteria.label }}</summary>
+        <article style="margin-top: .1rem;">
+            <strong>Objectifs</strong>
+            <blockquote [innerHTML]="criteria.purpose"></blockquote>
+
+            <strong>Mise en œuvre</strong>
+            <blockquote [innerHTML]="criteria.implementation"></blockquote>
+
+            <strong>Moyen de test ou de contrôle</strong>
+            <blockquote [innerHTML]="criteria.testing"></blockquote>
+        </article>
+    </details>
 }
