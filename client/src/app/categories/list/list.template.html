@@ -5,6 +5,9 @@
         <article>
             <header>{{ category.icon }} {{ category.name }}</header>
             {{ category.description }}
+            <footer>
+                <a routerLink="/categorie/{{ category.id }}">Lien</a>
+            </footer>
         </article>
     }
 </div>

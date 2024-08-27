@@ -1,0 +1,77 @@
+[
+  {
+    "1": [
+      {
+        "label": "Le service numérique a-t-il été évalué favorablement en termes d'utilité en tenant compte de ses impacts environnementaux ?",
+        "purpose": "Éviter le service numérique inutile : si le service numérique ne s'inscrit pas dans au moins l'un des objectifs de développement durable (ODD), l'un des enjeux de limites planétaires ou tout autre référentiel du même type, l'intégralité des impacts environnementaux qu'il génère est futile, donc à éviter.",
+        "implementation": "Pour évaluer l'utilité du service, se référer à des référentiels et déterminer en amont du projet si son utilité est avéré, comme par exemple :<br/><ul><li>les <a href=\"https://fr.wikipedia.org/wiki/Objectifs_de_d%C3%A9veloppement_durable\" target=\"_blank\">17 ODD de l'ONU</a></li><li>les <a href=\"https://fr.wikipedia.org/wiki/Limites_plan%C3%A9taires\" target=\"_blank\">9 limites planétaires</a></li><li>autre ?</li></ul>Si l'utilité du service ne s'inscrit pas dans ces référentiels, justifier en quoi le service est utile, participe à l'intérêt général ou est en appui à une politique publique.<br/>Afficher dans la déclaration d'écoconception (se référer aux critères dédiés) ou dans les mentions légales, les ODD dans lequel le service s'inscrit. Vérifier par exemple un ou plusieurs de ces points : sa pertinence, son utilité, sa création de valeur, son bien fondé, son service pour l'intéret général, sa réponse à des besoins essentiels, sa participation à la mise en place de commun numérique, etc.",
+        "testing": "Comment a été évalué le service, par exemple dans quels objectifs de développement durables s'inscrit le service, quelles sont les réponses aux enjeux de limites planétaires ou autre référentiel utilisé (précisé lequel), et leur pertinence dans la déclaration d'écoconception de ce service numérique.",
+        "link": "https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/critere/1.1/"
+      }
+    ],
+    "2": [
+      {
+        "label": "Le service numérique a-t-il été conçu avec une revue de conception et une revue de code en ayant pour un des objectifs de réduire les impacts environnementaux de chaque fonctionnalité ?",
+        "purpose": "Afin d'aboutir à une solution la plus sobre possible tout en répondant au besoin, il faut miser sur l'intelligence collective de toute l'équipe. Et pour cela, il ne suffit pas seulement de valider la conception par la revue de code, une bonne pratique maintenant assez répandue. Il est nécessaire, et cela sera positif pour l'équipe et pour le projet, de réfléchir en amont du développement, aux choix de conception et d'architecture, en ayant pour un des objectifs la minimisation des impacts environnementaux.",
+        "implementation": "En impliquant l'ensemble de l'équipe, l'ensemble des métiers, une revue conception en amont du développement est réalisée pour choisir la solution répondant au besoin tout en minimisant les impacts environnementaux. Puis, si du code a été produit pour implémenter la solution, une revue de code est faite en aval du développement.",
+        "testing": "Quel est le processus de développement mis en place ?",
+        "link": "https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/critere/2.1/"
+      }
+    ],
+    "3": [
+      {
+        "label": "",
+        "purpose": "",
+        "implementation": "",
+        "testing": "",
+        "link": ""
+      }
+    ],
+    "4": [
+      {
+        "label": "",
+        "purpose": "",
+        "implementation": "",
+        "testing": "",
+        "link": ""
+      }
+    ],
+    "5": [
+      {
+        "label": "",
+        "purpose": "",
+        "implementation": "",
+        "testing": "",
+        "link": ""
+      }
+    ],
+    "6": [
+      {
+        "label": "",
+        "purpose": "",
+        "implementation": "",
+        "testing": "",
+        "link": ""
+      }
+    ],
+    "7": [
+      {
+        "label": "",
+        "purpose": "",
+        "implementation": "",
+        "testing": "",
+        "link": ""
+      }
+    ],
+    "8": [
+      {
+        "label": "",
+        "purpose": "",
+        "implementation": "",
+        "testing": "",
+        "link": ""
+      }
+    ]
+
+  }
+]

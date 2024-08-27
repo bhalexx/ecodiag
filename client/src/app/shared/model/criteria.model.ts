@@ -2,8 +2,10 @@ import { CriteriaStatus } from './criteria-status.model';
 
 export class Criteria {
     comment?: string|null;
-    description: string;
+    implementation: string;
     label: string;
     link: string;
+    purpose: string;
     status: CriteriaStatus;
+    testing: string;
 }

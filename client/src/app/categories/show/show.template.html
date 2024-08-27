@@ -1,0 +1,8 @@
+{{  category.name }}
+
+@for (criteria of categoryCriteria; track $index) {
+    <article>
+        <header>{{ criteria.label }}</header>
+        {{ criteria.purpose }}
+    </article>
+}
