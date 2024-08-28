@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "sass:map";
 @use "@picocss/pico/scss/settings" as *;
 @use "@picocss/pico/scss/helpers/functions";
@@ -175,6 +176,45 @@ button,
 [type="file"]::file-selector-button,
 [role="button"] {
     #{$css-var-prefix}font-weight: 700;
+}
+
+button {
+    &.success {
+        #{$css-var-prefix}primary: #{$nord14};
+        #{$css-var-prefix}primary-background: var(#{$css-var-prefix}primary);
+        #{$css-var-prefix}primary-border: var(#{$css-var-prefix}primary-background);
+        #{$css-var-prefix}primary-underline: #{rgba($nord14, 0.5)};
+        #{$css-var-prefix}primary-hover: #{color.scale($nord14, $lightness: -21%)};
+        #{$css-var-prefix}primary-hover-background: #{color.scale($nord14, $lightness: 21%)};
+        #{$css-var-prefix}primary-hover-border: var(#{$css-var-prefix}primary-hover-background);
+        #{$css-var-prefix}primary-hover-underline: var(#{$css-var-prefix}primary-hover);
+        #{$css-var-prefix}primary-focus: #{rgba($nord14, 0.375)};
+        #{$css-var-prefix}primary-inverse: #{$nord0};
+    }
+    &.warning {
+        #{$css-var-prefix}primary: #{$nord13};
+        #{$css-var-prefix}primary-background: var(#{$css-var-prefix}primary);
+        #{$css-var-prefix}primary-border: var(#{$css-var-prefix}primary-background);
+        #{$css-var-prefix}primary-underline: #{rgba($nord13, 0.5)};
+        #{$css-var-prefix}primary-hover: #{color.scale($nord13, $lightness: -21%)};
+        #{$css-var-prefix}primary-hover-background: #{color.scale($nord13, $lightness: 21%)};
+        #{$css-var-prefix}primary-hover-border: var(#{$css-var-prefix}primary-hover-background);
+        #{$css-var-prefix}primary-hover-underline: var(#{$css-var-prefix}primary-hover);
+        #{$css-var-prefix}primary-focus: #{rgba($nord13, 0.375)};
+        #{$css-var-prefix}primary-inverse: #{$nord0};
+    }
+    &.danger {
+        #{$css-var-prefix}primary: #{$nord11};
+        #{$css-var-prefix}primary-background: var(#{$css-var-prefix}primary);
+        #{$css-var-prefix}primary-border: var(#{$css-var-prefix}primary-background);
+        #{$css-var-prefix}primary-underline: #{rgba($nord11, 0.5)};
+        #{$css-var-prefix}primary-hover: #{color.scale($nord11, $lightness: -21%)};
+        #{$css-var-prefix}primary-hover-background: #{color.scale($nord11, $lightness: 21%)};
+        #{$css-var-prefix}primary-hover-border: var(#{$css-var-prefix}primary-hover-background);
+        #{$css-var-prefix}primary-hover-underline: var(#{$css-var-prefix}primary-hover);
+        #{$css-var-prefix}primary-focus: #{rgba($nord11, 0.375)};
+        #{$css-var-prefix}primary-inverse: #{$nord6};
+    }
 }
 
 // Table

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import * as categoriesData from '../../../client-assets/data/categories.json';
 import * as criteriasData from '../../../client-assets/data/criteria.json';
+import { CriteriaStatusComponent } from '../../shared/components/criteria-status.component';
 import { Category } from '../../shared/model/category.model';
 import { Criteria } from '../../shared/model/criteria.model';
 
@@ -10,6 +11,7 @@ import { Criteria } from '../../shared/model/criteria.model';
     standalone: true,
     imports: [
         RouterLink,
+        CriteriaStatusComponent,
     ],
 })
 export class ShowComponent implements OnInit {

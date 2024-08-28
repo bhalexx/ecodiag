@@ -4,7 +4,6 @@ export class Criteria {
     comment?: string|null;
     implementation: string;
     label: string;
-    link: string;
     purpose: string;
     status: CriteriaStatus;
     testing: string;
