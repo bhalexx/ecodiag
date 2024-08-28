@@ -68,7 +68,7 @@
         #{$css-var-prefix}h6-color: #{$nord3};
 
         // Highlighted text (<mark>)
-        #{$css-var-prefix}mark-background-color: #{mix($nord13, rgba($nord13, 0.0375))};
+        #{$css-var-prefix}mark-background-color: #{mix($nord7, rgba($nord7, 0.0375))};
         #{$css-var-prefix}mark-color: #{$nord0};
 
         // Inserted (<ins>) & Deleted (<del>)
@@ -177,7 +177,7 @@
         #{$css-var-prefix}card-background-color: var(#{$css-var-prefix}background-color);
         #{$css-var-prefix}card-border-color: var(#{$css-var-prefix}muted-border-color);
         #{$css-var-prefix}card-box-shadow: var(#{$css-var-prefix}box-shadow);
-        #{$css-var-prefix}card-sectioning-background-color: #{mix($nord5, $nord6, 25%)};
+        #{$css-var-prefix}card-sectioning-background-color: #{mix($nord5, $nord6, 50%)};
     }
 
     // Dropdown (details.dropdown)

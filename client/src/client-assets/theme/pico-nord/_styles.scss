@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "sass:map";
 @use "@picocss/pico/scss/settings" as *;
 @use "@picocss/pico/scss/helpers/functions";
@@ -43,16 +44,30 @@
     // Spacings
     #{$css-var-prefix}spacing: 1rem;
 
+    // Grid gap
+    #{$css-var-prefix}grid-column-gap: 1rem;
+    #{$css-var-prefix}grid-row-gap: 1rem;
+
     // Spacings for typography elements
     @if map.get($modules, "content/typography") {
         #{$css-var-prefix}typography-spacing-vertical: 1rem;
     }
 
+    // Spacings for nav element
+    @if map.get($modules, "components/nav") {
+        #{$css-var-prefix}modal-overlay-backdrop-filter: blur(.375rem);
+        #{$css-var-prefix}nav-element-spacing-vertical: 1rem;
+        #{$css-var-prefix}nav-element-spacing-horizontal: .5rem;
+        #{$css-var-prefix}nav-link-spacing-vertical: .5rem;
+        #{$css-var-prefix}nav-link-spacing-horizontal: .5rem;
+        #{$css-var-prefix}nav-breadcrumb-divider: ">";
+    }
+
     // Spacings for body > header, body > main, body > footer, section, article
     @if map.get($modules, "layout/landmarks") or
-    map.get($modules, "layout/section") or
-    map.get($modules, "components/card") or
-    map.get($modules, "components/modal")
+        map.get($modules, "layout/section") or
+        map.get($modules, "components/card") or
+        map.get($modules, "components/modal")
     {
         #{$css-var-prefix}block-spacing-vertical: calc(var(#{$css-var-prefix}spacing) * 1.5);
         #{$css-var-prefix}block-spacing-horizontal: calc(var(#{$css-var-prefix}spacing) * 1.5);
@@ -77,8 +92,8 @@
 
     // Chevron icons
     @if map.get($modules, "forms/basics") or
-    map.get($modules, "components/accordion") or
-    map.get($modules, "components/dropdown")
+        map.get($modules, "components/accordion") or
+        map.get($modules, "components/dropdown")
     {
         #{$css-var-prefix}icon-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='#{functions.display-rgb($nord4)}' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     }
@@ -161,6 +176,45 @@ button,
 [type="file"]::file-selector-button,
 [role="button"] {
     #{$css-var-prefix}font-weight: 700;
+}
+
+button {
+    &.success {
+        #{$css-var-prefix}primary: #{$nord14};
+        #{$css-var-prefix}primary-background: var(#{$css-var-prefix}primary);
+        #{$css-var-prefix}primary-border: var(#{$css-var-prefix}primary-background);
+        #{$css-var-prefix}primary-underline: #{rgba($nord14, 0.5)};
+        #{$css-var-prefix}primary-hover: #{color.scale($nord14, $lightness: -21%)};
+        #{$css-var-prefix}primary-hover-background: #{color.scale($nord14, $lightness: 21%)};
+        #{$css-var-prefix}primary-hover-border: var(#{$css-var-prefix}primary-hover-background);
+        #{$css-var-prefix}primary-hover-underline: var(#{$css-var-prefix}primary-hover);
+        #{$css-var-prefix}primary-focus: #{rgba($nord14, 0.375)};
+        #{$css-var-prefix}primary-inverse: #{$nord0};
+    }
+    &.warning {
+        #{$css-var-prefix}primary: #{$nord13};
+        #{$css-var-prefix}primary-background: var(#{$css-var-prefix}primary);
+        #{$css-var-prefix}primary-border: var(#{$css-var-prefix}primary-background);
+        #{$css-var-prefix}primary-underline: #{rgba($nord13, 0.5)};
+        #{$css-var-prefix}primary-hover: #{color.scale($nord13, $lightness: -21%)};
+        #{$css-var-prefix}primary-hover-background: #{color.scale($nord13, $lightness: 21%)};
+        #{$css-var-prefix}primary-hover-border: var(#{$css-var-prefix}primary-hover-background);
+        #{$css-var-prefix}primary-hover-underline: var(#{$css-var-prefix}primary-hover);
+        #{$css-var-prefix}primary-focus: #{rgba($nord13, 0.375)};
+        #{$css-var-prefix}primary-inverse: #{$nord0};
+    }
+    &.danger {
+        #{$css-var-prefix}primary: #{$nord11};
+        #{$css-var-prefix}primary-background: var(#{$css-var-prefix}primary);
+        #{$css-var-prefix}primary-border: var(#{$css-var-prefix}primary-background);
+        #{$css-var-prefix}primary-underline: #{rgba($nord11, 0.5)};
+        #{$css-var-prefix}primary-hover: #{color.scale($nord11, $lightness: -21%)};
+        #{$css-var-prefix}primary-hover-background: #{color.scale($nord11, $lightness: 21%)};
+        #{$css-var-prefix}primary-hover-border: var(#{$css-var-prefix}primary-hover-background);
+        #{$css-var-prefix}primary-hover-underline: var(#{$css-var-prefix}primary-hover);
+        #{$css-var-prefix}primary-focus: #{rgba($nord11, 0.375)};
+        #{$css-var-prefix}primary-inverse: #{$nord6};
+    }
 }
 
 // Table

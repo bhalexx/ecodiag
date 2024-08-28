@@ -1,9 +1,8 @@
 services:
-    maildev:
-        image: maildev/maildev
+    mailpit:
+        image: axllent/mailpit
         ports:
-            - ${MAILDEV_PORT}:80
-        command: maildev --hide-extensions STARTTLS --web 80 --smtp 25
+            - ${MAILDEV_PORT}:8025
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
