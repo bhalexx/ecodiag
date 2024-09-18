@@ -7,7 +7,9 @@
             <mark>{{ category.id }}.{{ $index + 1  }}</mark> {{ criteria.label }}
         </header>
 
-        <criteria-status />
+        <form [formGroup]="form">
+            <criteria-status formControlName="criterias" [groupName]="generateName(category, $index)" (valueChange)="change($event)" />
+        </form>
 
         <footer>
             <details>
