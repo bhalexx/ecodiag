@@ -1,33 +1,33 @@
 <h1>{{  category.name }}</h1>
 <p>{{ category.description }}</p>
 
-@for (criteria of categoryCriteria; track $index) {
-    <article>
-        <header>
-            <mark>{{ category.id }}.{{ $index + 1  }}</mark> {{ criteria.label }}
-        </header>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    @for (criteria of categoryCriteria; track $index) {
+        <article>
+            <header>
+                <mark>{{ category.id }}.{{ $index + 1  }}</mark> {{ criteria.label }}
+            </header>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <criteria-status formControlName="criterias" [groupName]="generateName(category, $index)" (valueChange)="change($event)" />
-        </form>
 
-        <footer>
-            <details>
-                <summary class="pointer">
-                    <strong>🎯 Objectifs et mise en œuvre</strong>&nbsp;<small>(cliquez pour déplier)</small>
-                </summary>
-                <br/>
-                <strong>Objectifs</strong>
-                <blockquote [innerHTML]="criteria.purpose"></blockquote>
+            <footer>
+                <details>
+                    <summary class="pointer">
+                        <strong>🎯 Objectifs et mise en œuvre</strong>&nbsp;<small>(cliquez pour déplier)</small>
+                    </summary>
+                    <br/>
+                    <strong>Objectifs</strong>
+                    <blockquote [innerHTML]="criteria.purpose"></blockquote>
 
-                <strong>Mise en œuvre</strong>
-                <blockquote [innerHTML]="criteria.implementation"></blockquote>
+                    <strong>Mise en œuvre</strong>
+                    <blockquote [innerHTML]="criteria.implementation"></blockquote>
 
-                <strong>Moyen de test ou de contrôle</strong>
-                <blockquote [innerHTML]="criteria.testing"></blockquote>
+                    <strong>Moyen de test ou de contrôle</strong>
+                    <blockquote [innerHTML]="criteria.testing"></blockquote>
 
-                🔗 <a href="https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/critere/{{ category.id }}.{{ $index + 1 }}" target="_blank">Lien</a>
-            </details>
-        </footer>
-    </article>
-}
+                    🔗 <a href="https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/critere/{{ category.id }}.{{ $index + 1 }}" target="_blank">Lien</a>
+                </details>
+            </footer>
+        </article>
+    }
+</form>

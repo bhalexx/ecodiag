@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Stratégie",
+    "description": "Elle permet de déterminer et de suivre la pertinence, les enjeux et le pilotage de la conception du service numérique.",
+    "icon": "♟\uFE0F"
+  },
+  {
+    "id": 2,
+    "name": "Spécifications",
+    "description": "Indépendamment du type de gestion projet, cette thématique regroupe les éléments de cadrage projet, les moyens mis en œuvre, les objectifs et contraintes du projet sur toute la durée de vie du service numérique.",
+    "icon": "\uD83C\uDFD7\uFE0F"
+  },
+  {
+    "id": 3,
+    "name": "Architecture",
+    "description": "La stratégie de conception et l'articulation des composants applicatifs entre le frontend et le backend.",
+    "icon": "\uD83D\uDCD0"
+  },
+  {
+    "id": 4,
+    "name": "UX/UI",
+    "description": "Les étapes et méthodes de conception des services numériques pour définir les meilleures solutions d'interactions destinées aux utilisateurs.",
+    "icon": "\uD83C\uDFA8"
+  },
+  {
+    "id": 5,
+    "name": "Contenus",
+    "description": "Tous les documents et médias informatifs ajoutés au service numérique par des personnes contributrices et disponibles pour l'utilisateur final.",
+    "icon": "\uD83D\uDCDD"
+  },
+  {
+    "id": 6,
+    "name": "Frontend",
+    "description": "Ensemble des composants en opération sur un terminal utilisateur pour permettre l'utilisation d'un service numérique.",
+    "icon": "⚙\uFE0F"
+  },
+  {
+    "id": 7,
+    "name": "Backend",
+    "description": "Ensemble des composants en opération côté serveur pour permettre le fonctionnement d'un service numérique.",
+    "icon": "\uD83D\uDD27"
+  },
+  {
+    "id": 8,
+    "name": "Hébergement",
+    "description": "Moyens mis en œuvre côté serveur pour permettre l'utilisation d'un service numérique.",
+    "icon": "\uD83D\uDDC4\uFE0F"
+  }
+]

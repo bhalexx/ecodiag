@@ -21,7 +21,7 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
     categories: Array<Category> = (categoriesData as any).default;
     category: Category = null;
     categoryCriteria: Array<Criteria> = [];
-    criterias: Array<{id: Array<Criteria>;}> = (criteriasData as any).default;
+    criterias: Array<{id: Array<Criteria>; value: number}> = (criteriasData as any).default;
 
     form: UntypedFormGroup;
 
