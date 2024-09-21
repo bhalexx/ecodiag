@@ -7,7 +7,7 @@
             <mark>{{ category.id }}.{{ $index + 1  }}</mark> {{ criteria.label }}
         </header>
 
-        <form [formGroup]="form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <criteria-status formControlName="criterias" [groupName]="generateName(category, $index)" (valueChange)="change($event)" />
         </form>
 

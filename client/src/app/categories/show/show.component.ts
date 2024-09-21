@@ -40,6 +40,10 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
         this.categoryCriteria = this.criterias[0][this.category.id];
     }
 
+    onSubmit(): void {
+        console.log(this.getFormData());
+    }
+
     protected createForm(): object {
         return {
             criterias: this.fb.control([]),
