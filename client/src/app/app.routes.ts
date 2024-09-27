@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ListComponent } from './categories/list/list.component';
-import { ShowComponent } from './categories/show/show.component';
+import { ListComponent } from './categories/components/list/list.component';
+import { ShowComponent } from './categories/components/show/show.component';
 import { StyleguideComponent } from './styleguide/styleguide.component';
 
 export const routes: Routes = [

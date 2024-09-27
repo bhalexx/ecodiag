@@ -1,7 +1,7 @@
 <p>Cet outil de diagnostic se base sur la version 2024 du Référentiel général d'écoconception de services numériques (RGESN) et en reprend donc les mêmes catégories.</p>
 
 <div class="grid grid-2">
-    @for (category of categories; track category.id) {
+    @for (category of categories$|async; track category.id) {
         <article>
             <header>{{ category.icon }} {{ category.name }}</header>
             {{ category.description }}
