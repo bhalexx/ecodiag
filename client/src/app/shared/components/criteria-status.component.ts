@@ -1,7 +1,8 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, forwardRef, Output } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CriteriaStatus } from '../model/criteria-status.model';
+import { Criteria } from '../model/criteria.model';
 import { AbstractCheckboxesComponent } from './form/abstract-checkboxes.component';
 
 @Component({
@@ -33,7 +34,8 @@ import { AbstractCheckboxesComponent } from './form/abstract-checkboxes.componen
 })
 export class CriteriaStatusComponent extends AbstractCheckboxesComponent {
     protected static WITH_ID = false;
-    @Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
+    @Input({required: true}) criteria: Criteria;
+    @Output() valueChange: EventEmitter<{ criteria: Criteria, value: number }> = new EventEmitter<{ criteria: Criteria, value: number }>();
 
     statuses = [
         {value: CriteriaStatus.COMPLIANT, label: 'Conforme', color: 'success'},
@@ -45,14 +47,9 @@ export class CriteriaStatusComponent extends AbstractCheckboxesComponent {
 
     registerOnChange(fn: any): void {
         this.onChange = (value: any) => {
-            this.valueChange.emit(value);
+            this.valueChange.emit({ criteria: this.criteria, value: value});
             this.value = value;
             fn(value);
         };
     }
-
-    // update(value: number): void {
-    //     this.value = value;
-    //     this.valueChange.emit(value);
-    // }
 }

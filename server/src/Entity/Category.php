@@ -32,6 +32,7 @@ class Category
 
     #[ORM\OneToMany(targetEntity: Criterion::class, mappedBy: 'category', orphanRemoval: true)]
     #[ORM\OrderBy(value: ['id' => 'ASC'])]
+    #[Groups(['categories.show'])]
     private Collection $criteria;
 
     public function __construct()

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Rest\ParamRequirements;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,12 +18,14 @@ class CategoryController extends AbstractController
     {
         $categories = $repository->findAll();
 
-        return $this->json($categories, 200, [], ['groups' => 'categories.list']);
+        return $this->json($categories, Response::HTTP_OK, [], ['groups' => 'categories.list']);
     }
 
     #[Route(path: '/{id}', name: 'category_get', requirements: ['id' => ParamRequirements::INTEGER], methods: 'GET')]
-    public function get(): Response
+    public function get(Category $category): JsonResponse
     {
-        return new Response('response');
+        return $this->json($category, Response::HTTP_OK, [], [
+            'groups' => ['categories.list', 'categories.show'],
+        ]);
     }
 }
