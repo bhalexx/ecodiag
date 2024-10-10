@@ -4,19 +4,24 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^3.2",
         "symfony/console": "7.1.*",
         "symfony/dotenv": "7.1.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "7.1.*",
+        "symfony/property-access": "7.1.*",
         "symfony/runtime": "7.1.*",
+        "symfony/serializer": "7.1.*",
         "symfony/yaml": "7.1.*"
     },
     "require-dev": {
         "phpstan/phpstan": "*",
-        "phpstan/phpstan-symfony": "*"
+        "phpstan/phpstan-symfony": "*",
+        "symfony/web-profiler-bundle": "7.1.*"
     },
     "config": {
         "allow-plugins": {
