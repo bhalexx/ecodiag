@@ -2,11 +2,13 @@
     <h1>{{ category.icon }}{{ category.name }}</h1>
     <p>{{ category.description }}</p>
 
+    <progress [value]="progress" max="100"></progress>
+
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
             @for (criterion of category.criteria; track $index) {
                 <article>
                     <header>
-                        <mark>{{ category.id }}.{{ criterion.id }}</mark> {{ criterion.label }}
+                        <mark>{{ category.id }}.{{ $index + 1 }}</mark> {{ criterion.label }}
                     </header>
 
                     <criteria-status [formControlName]="'criterion_' + criterion.id"

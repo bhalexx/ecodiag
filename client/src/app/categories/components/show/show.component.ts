@@ -31,6 +31,10 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
     criteriaValues: Array<CriterionValue> = [];
     form: FormGroup;
 
+    get progress(): number {
+        return this.criteriaValues.filter((criterionValue: CriterionValue) => null !== criterionValue.status).length / this.criteriaValues.length * 100;
+    }
+
     change(criterion: CriterionValue): void {
         if (0 === this.criteriaValues.length) {
             this.criteriaValues.push({ id: criterion.id, status: criterion.status });
