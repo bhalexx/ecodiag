@@ -3,33 +3,38 @@
     <p>{{ category.description }}</p>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        @for (criterion of category.criteria; track criterion.id) {
-            <article>
-                <header>
-                    <mark>{{ category.id }}.{{ criterion.id }}</mark> {{ criterion.label }}
-                </header>
+            @for (criterion of category.criteria; track $index) {
+                <article>
+                    <header>
+                        <mark>{{ category.id }}.{{ criterion.id }}</mark> {{ criterion.label }}
+                    </header>
 
-                <criteria-status formControlName="criterias" [criteria]="criterion" [groupName]="'criteria_' + criterion.id" (valueChange)="change($event)" />
+                    <criteria-status [formControlName]="'criterion_' + criterion.id"
+                                     [criterion]="{id: criterion.id, status: null}"
+                                     [groupName]="'criterion_' + criterion.id"
+                                     (valueChange)="change($event)" />
 
-                <footer>
-                    <details>
-                        <summary class="pointer">
-                            <strong>🎯 Objectifs et mise en œuvre</strong>&nbsp;<small>(cliquez pour déplier)</small>
-                        </summary>
-                        <br/>
-                        <strong>Objectifs</strong>
-                        <blockquote [innerHTML]="criterion.purpose"></blockquote>
+                    <footer>
+                        <details>
+                            <summary class="pointer">
+                                <strong>🎯 Objectifs et mise en œuvre</strong>&nbsp;<small>(cliquez pour déplier)</small>
+                            </summary>
+                            <br/>
+                            <strong>Objectifs</strong>
+                            <blockquote [innerHTML]="criterion.purpose"></blockquote>
 
-                        <strong>Mise en œuvre</strong>
-                        <blockquote [innerHTML]="criterion.implementation"></blockquote>
+                            <strong>Mise en œuvre</strong>
+                            <blockquote [innerHTML]="criterion.implementation"></blockquote>
 
-                        <strong>Moyen de test ou de contrôle</strong>
-                        <blockquote [innerHTML]="criterion.testing"></blockquote>
+                            <strong>Moyen de test ou de contrôle</strong>
+                            <blockquote [innerHTML]="criterion.testing"></blockquote>
 
-                        🔗 <a href="https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/critere/{{ category.id }}.{{ $index + 1 }}" target="_blank">Lien</a>
-                    </details>
-                </footer>
-            </article>
-        }
+                            🔗 <a href="https://ecoresponsable.numerique.gouv.fr/publications/referentiel-general-ecoconception/critere/{{ category.id }}.{{ $index + 1 }}" target="_blank">Lien</a>
+                        </details>
+                    </footer>
+                </article>
+            }
+
+        <button type="submit">Suivant</button>
     </form>
 }
