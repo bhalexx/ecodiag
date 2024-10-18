@@ -1,8 +1,10 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { ENVIRONMENT } from '../../../environment/environment.config';
+import { Environment } from '../../../environment/environment.model';
 import { CriteriaStatusComponent } from '../../../shared/components/criteria-status.component';
 import { AbstractFormBuilderComponent } from '../../../shared/components/form/abstract-form-builder.component';
 import { Category } from '../../../shared/model/category.model';
@@ -60,7 +62,7 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
     ngOnInit(): void {
         this.category$ = this.service.get(parseInt(this.route.snapshot.params.id, 10))
             .pipe(tap((category: Category): void => {
-                this.categoryStorageKey = `ECO_cat_${category.id}`;
+                this.categoryStorageKey = `${this.environment.categoryPrefix}${category.id}`;
                 this.criteriaValues = category.criteria.map((criterion: Criterion) => ({ id: criterion.id, status: null }));
 
                 if (null !== this.storage.getItem(this.categoryStorageKey)) {
@@ -85,6 +87,7 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
         fb: FormBuilder,
         private route: ActivatedRoute,
         private storage: LocalStorageService,
+        @Inject(ENVIRONMENT) private environment: Environment,
     ) {
         super(fb);
     }
