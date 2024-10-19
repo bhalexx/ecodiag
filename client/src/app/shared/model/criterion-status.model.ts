@@ -1,4 +1,4 @@
-export class CriteriaStatus {
+export class CriterionStatus {
     static readonly COMPLIANT = 10 as const;
     static readonly NOT_APPLICABLE = 0 as const;
     static readonly PENDING = 5 as const;

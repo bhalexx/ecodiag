@@ -1,15 +1,18 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, tap } from 'rxjs';
+import { ENVIRONMENT } from '../../../environment/environment.config';
+import { Environment } from '../../../environment/environment.model';
 import { CriteriaStatusComponent } from '../../../shared/components/criteria-status.component';
 import { AbstractFormBuilderComponent } from '../../../shared/components/form/abstract-form-builder.component';
 import { Category } from '../../../shared/model/category.model';
-import { Criteria } from '../../../shared/model/criteria.model';
+import { Criterion } from '../../../shared/model/criterion.model';
+import { LocalStorageService } from '../../../shared/services/localstorage.service';
 import { CategoryListService } from '../../services/category-list.service';
 
-export class CriteriaValue { id: number; status: null|number };
+export class CriterionValue { id: number; status: null|number; }
 
 @Component({
     templateUrl: './show.template.html',
@@ -26,39 +29,65 @@ export class CriteriaValue { id: number; status: null|number };
 })
 export class ShowComponent extends AbstractFormBuilderComponent implements OnInit {
     category$: Observable<Category>;
-    criteriaValues: Array<CriteriaValue> = [];
+    categoryStorageKey: string;
+    criteriaValues: Array<CriterionValue> = [];
+    form: FormGroup;
 
-    form: UntypedFormGroup;
+    get progress(): number {
+        return this.criteriaValues.filter((criterionValue: CriterionValue) => null !== criterionValue.status).length / this.criteriaValues.length * 100;
+    }
 
-    change(criteria: { criteria: Criteria, value: number }): void {
-        this.criteriaValues = this.criteriaValues.map((value: CriteriaValue) => value.id === criteria.criteria.id
-            ? {...value, status: criteria.value }
-            : value
-        );
+    change(criterion: CriterionValue): void {
+        if (0 === this.criteriaValues.length) {
+            this.criteriaValues.push({ id: criterion.id, status: criterion.status });
+        } else {
+            this.criteriaValues = this.criteriaValues.map((value: CriterionValue) => value.id === criterion.id
+                ? {...value, status: criterion.status }
+                : value,
+            );
+        }
+
+        this.saveChanges();
+    }
+
+    createForm(): object {
+        let criteria = {};
+        this.criteriaValues.forEach((criterionValue: CriterionValue) => {
+            criteria = {...criteria, [`criterion_${[criterionValue.id]}`]: criterionValue.status };
+        });
+
+        return criteria;
     }
 
     ngOnInit(): void {
-        super.ngOnInit();
         this.category$ = this.service.get(parseInt(this.route.snapshot.params.id, 10))
-            .pipe(tap((category: Category) => {
-                this.criteriaValues = category.criteria.map((criteria: Criteria) => ({ id: criteria.id, status: null }));
+            .pipe(tap((category: Category): void => {
+                this.categoryStorageKey = `${this.environment.categoryPrefix}${category.id}`;
+                this.criteriaValues = category.criteria.map((criterion: Criterion) => ({ id: criterion.id, status: null }));
+
+                if (null !== this.storage.getItem(this.categoryStorageKey)) {
+                    this.criteriaValues = JSON.parse(this.storage.getItem(this.categoryStorageKey));
+                }
+
+                this.saveChanges();
+                super.ngOnInit();
             }));
     }
 
     onSubmit(): void {
-        console.log(this.form.value());
+        console.log(this.getFormData());
     }
 
-    protected createForm(): object {
-        return {
-            criterias: this.fb.control([]),
-        };
+    saveChanges(): void {
+        this.storage.setItem(this.categoryStorageKey, JSON.stringify(this.criteriaValues));
     }
 
     constructor(
-        protected service: CategoryListService,
+        private service: CategoryListService,
         fb: FormBuilder,
         private route: ActivatedRoute,
+        private storage: LocalStorageService,
+        @Inject(ENVIRONMENT) private environment: Environment,
     ) {
         super(fb);
     }

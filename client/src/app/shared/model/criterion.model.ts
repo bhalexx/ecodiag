@@ -1,11 +1,11 @@
-import { CriteriaStatus } from './criteria-status.model';
+import { CriterionStatus } from './criterion-status.model';
 
-export class Criteria {
+export class Criterion {
     comment?: string|null;
     id: number;
     implementation: string;
     label: string;
     purpose: string;
-    status: CriteriaStatus;
+    status: CriterionStatus;
     testing: string;
 }
