@@ -1,6 +1,9 @@
 import { EnvironmentName } from './environment-name.type';
 
 export class Environment {
-    categoryPrefix: string;
     name: EnvironmentName;
+    storage: {
+        categories: string;
+        category: string;
+    };
 }

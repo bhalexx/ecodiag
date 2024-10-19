@@ -29,6 +29,7 @@ export class ListComponent implements OnInit {
     ngOnInit(): void {
         this.categories$ = this.service.getList()
             .pipe(tap((categories: Array<Category>) => {
+                this.storage.setItem(this.environment.storage.categories, categories.length.toString(10));
                 categories.forEach((category: Category) => {
                     category.progression = this.progress(category);
                 });
@@ -36,7 +37,7 @@ export class ListComponent implements OnInit {
     }
 
     progress(category: Category): number {
-        const criteriaValues = JSON.parse(this.storage.getItem(`${this.environment.categoryPrefix}${category.id}`));
+        const criteriaValues = JSON.parse(this.storage.getItem(`${this.environment.storage.category}${category.id}`));
 
         if (null === criteriaValues) {
             return 0;
