@@ -3,10 +3,10 @@
 <div class="grid grid-2">
     @for (category of categories$|async; track category.id) {
         <article>
-            <header>{{ category.icon }} {{ category.name }}</header>
+            <header>{{ category.icon }} {{ category.name }} <mark>{{ category.progression|number: '1.0-0' }} %</mark></header>
             {{ category.description }}
             <footer>
-                <a routerLink="/categorie/{{ category.id }}">Lien</a>
+                <a routerLink="/categorie/{{ category.id }}">Compléter</a>
             </footer>
         </article>
     }

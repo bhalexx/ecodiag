@@ -6,4 +6,5 @@ export class Category {
     icon: string;
     id: number;
     name: string;
+    progression: number;
 }
