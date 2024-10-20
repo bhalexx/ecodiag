@@ -2,6 +2,9 @@
     <h1>{{ category.icon }}{{ category.name }}</h1>
     <p>{{ category.description }}</p>
 
+    <ng-template [ngTemplateOutlet]="buttonsTpl" />
+
+    Progression :
     <progress [value]="progress" max="100"></progress>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -19,7 +22,7 @@
                 <footer>
                     <details>
                         <summary class="pointer">
-                            <strong>🎯 Objectifs et mise en œuvre</strong>&nbsp;<small>(cliquez pour déplier)</small>
+                            <strong>🎯 Objectifs, mise en œuvre et moyens de contrôle</strong>&nbsp;<small>(cliquez pour déplier)</small>
                         </summary>
                         <br/>
                         <strong>Objectifs</strong>
@@ -37,16 +40,20 @@
             </article>
         }
 
-        <div role="group">
-            @if (previous) {
-                <a routerLink="/categorie/{{ previous}}" role="button" class="primary">Catégorie précédente</a>
-            }
-            @if (hasNext) {
-                <a routerLink="/" role="button" class="secondary">Retour à la liste</a>
-                <button type="submit">Catégorie suivante</button>
-            } @else {
-                <button type="submit">Sauver et revenir à la liste</button>
-            }
-        </div>
+        <ng-template [ngTemplateOutlet]="buttonsTpl" />
     </form>
 }
+
+<ng-template #buttonsTpl>
+    <div role="group">
+        @if (previous) {
+            <a routerLink="/categorie/{{ previous}}" role="button" class="primary">Catégorie précédente</a>
+        }
+        @if (hasNext) {
+            <a routerLink="/" role="button" class="secondary">Retour à la liste</a>
+            <button type="submit">Catégorie suivante</button>
+        } @else {
+            <button type="submit">Sauver et revenir à la liste</button>
+        }
+    </div>
+</ng-template>

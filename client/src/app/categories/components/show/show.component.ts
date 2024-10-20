@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
@@ -22,6 +22,7 @@ export class CriterionValue { id: number; status: null|number; }
         CriteriaStatusComponent,
         ReactiveFormsModule,
         AsyncPipe,
+        NgTemplateOutlet,
     ],
     providers: [
         CategoryListService,
