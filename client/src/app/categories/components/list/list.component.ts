@@ -25,14 +25,23 @@ import { CriterionValue } from '../show/show.component';
 })
 export class ListComponent implements OnInit {
     categories$: Observable<Array<Category>>;
+    globalProgression: number;
+
+    export(): void {
+        console.log('export');
+    }
 
     ngOnInit(): void {
         this.categories$ = this.service.getList()
             .pipe(tap((categories: Array<Category>) => {
                 this.storage.setItem(this.environment.storage.categories, categories.length.toString(10));
-                categories.forEach((category: Category) => {
+                this.globalProgression = 0;
+                categories.forEach((category: Category): void => {
                     category.progression = this.progress(category);
+                    this.globalProgression += category.progression;
                 });
+
+                this.globalProgression = (this.globalProgression / (categories.length * 100)) * 100;
             }));
     }
 

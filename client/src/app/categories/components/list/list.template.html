@@ -1,9 +1,20 @@
 <p>Cet outil de diagnostic se base sur la version 2024 du Référentiel général d'écoconception de services numériques (RGESN) et en reprend donc les mêmes catégories.</p>
 
+@if (100 === globalProgression) {
+    <article>
+        <p>
+            <strong>🎉 Félicitations !</strong><br/>
+            Vous avez complété l'ensemble des catégories, et votre score s'élève à : <strong>10 %</strong>.<br/>
+            Si vous le souhaitez, vous pouvez télécharger votre rapport.
+        </p>
+        <button (click)="export()">Télécharger mon rapport</button>
+    </article>
+}
+
 <div class="grid grid-2">
     @for (category of categories$|async; track category.id) {
         <article>
-            <header>{{ category.icon }} {{ category.name }} <mark>{{ category.progression|number: '1.0-0' }} %</mark></header>
+            <header>{{ category.icon }} {{ category.name }} <mark data-tooltip="Progression">{{ category.progression|number: '1.0-0' }} %</mark></header>
             {{ category.description }}
             <footer>
                 <a routerLink="/categorie/{{ category.id }}">Compléter</a>
