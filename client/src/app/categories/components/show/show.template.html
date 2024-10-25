@@ -40,6 +40,13 @@
             </article>
         }
 
+        @if (0 < progress) {
+            <article>
+                Le niveau de conformité pour cette catégorie est de :
+                <mark>{{ score|number: '1.0-0' }} %</mark>
+            </article>
+        }
+
         <ng-template [ngTemplateOutlet]="buttonsTpl" />
     </form>
 }

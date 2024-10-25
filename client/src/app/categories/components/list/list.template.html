@@ -4,18 +4,36 @@
     <article>
         <p>
             <strong>🎉 Félicitations !</strong><br/>
-            Vous avez complété l'ensemble des catégories, et votre score s'élève à : <strong>10 %</strong>.<br/>
+            Vous avez complété l'ensemble des catégories, et votre score s'élève à : <mark>{{ globalScore|number:'1.0-0' }} %</mark>.<br/>
             Si vous le souhaitez, vous pouvez télécharger votre rapport.
         </p>
         <button (click)="export()">Télécharger mon rapport</button>
+    </article>
+} @else {
+    <article>
+        <p>
+            @if (globalProgression) {
+                <strong>Complétion</strong> :<br/>
+                <progress [value]="globalProgression" max="100"></progress>
+            }
+            Il vous reste des catégories et critères à compléter, pour le moment votre score de conformité s'élève à : <mark>{{ globalScore|number:'1.0-0' }} %</mark>.
+        </p>
     </article>
 }
 
 <div class="grid grid-2">
     @for (category of categories$|async; track category.id) {
         <article>
-            <header>{{ category.icon }} {{ category.name }} <mark data-tooltip="Score">{{ category.progression|number: '1.0-0' }} %</mark></header>
+            <header>
+                <div class="grid grid-2">
+                    <span>{{ category.icon }} {{ category.name }}</span>
+                    @if (0 < category.progression) {
+                        <span>Conformité : <mark>{{ category.score|number: '1.0-0' }} %</mark></span>
+                    }
+                </div>
+            </header>
             @if (0 < category.progression) {
+                <small>Complétion :</small>
                 <progress [value]="category.progression" max="100"></progress>
             }
             <p>{{ category.description }}</p>

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DecimalPipe, NgTemplateOutlet } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
@@ -10,6 +10,7 @@ import { AbstractFormBuilderComponent } from '../../../shared/components/form/ab
 import { Category } from '../../../shared/model/category.model';
 import { Criterion } from '../../../shared/model/criterion.model';
 import { LocalStorageService } from '../../../shared/services/localstorage.service';
+import { ScoringService } from '../../../shared/services/scoring.service';
 import { CategoryListService } from '../../services/category-list.service';
 
 export class CriterionValue { id: number; status: null|number; }
@@ -23,6 +24,7 @@ export class CriterionValue { id: number; status: null|number; }
         ReactiveFormsModule,
         AsyncPipe,
         NgTemplateOutlet,
+        DecimalPipe,
     ],
     providers: [
         CategoryListService,
@@ -32,13 +34,16 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
     private categoryStorageKey: string;
     private criteriaValues: Array<CriterionValue> = [];
     private id: number;
+
     category$: Observable<Category>;
     form: FormGroup;
     hasNext: boolean;
     previous: number;
+    score: number;
 
     get progress(): number {
-        return this.criteriaValues.filter((criterionValue: CriterionValue) => null !== criterionValue.status).length / this.criteriaValues.length * 100;
+        return this.criteriaValues.filter((criterionValue: CriterionValue) =>
+            null !== criterionValue.status).length / this.criteriaValues.length * 100;
     }
 
     change(criterion: CriterionValue): void {
@@ -51,6 +56,7 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
             );
         }
 
+        this.score = this.scoring.compute(this.criteriaValues);
         this.saveChanges();
     }
 
@@ -67,15 +73,16 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
         this.category$ = this.service.get(parseInt(this.route.snapshot.params.id, 10))
             .pipe(tap((category: Category): void => {
                 this.id = category.id;
-                this.hasNext = this.id < parseInt(this.storage.getItem(this.environment.storage.categories));
+                this.hasNext = this.id < parseInt(this.storage.getItem(this.environment.storage.count.categories));
                 this.previous = 1 < this.id ? this.id - 1 : null;
-                this.categoryStorageKey = `${this.environment.storage.category}${this.id}`;
+                this.categoryStorageKey = `${this.environment.storage.category}_${this.id}`;
                 this.criteriaValues = category.criteria.map((criterion: Criterion) => ({ id: criterion.id, status: null }));
 
                 if (null !== this.storage.getItem(this.categoryStorageKey)) {
                     this.criteriaValues = JSON.parse(this.storage.getItem(this.categoryStorageKey));
                 }
 
+                this.score = this.scoring.compute(this.criteriaValues);
                 this.saveChanges();
                 super.ngOnInit();
             }));
@@ -108,6 +115,7 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
         private route: ActivatedRoute,
         private router: Router,
         private storage: LocalStorageService,
+        private scoring: ScoringService,
         @Inject(ENVIRONMENT) private environment: Environment,
     ) {
         super(fb);
