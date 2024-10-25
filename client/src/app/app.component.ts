@@ -5,6 +5,7 @@ import { ENVIRONMENT } from './environment/environment.config';
 import { Environment } from './environment/environment.model';
 import { CounterService } from './shared/services/counter.service';
 import { LocalStorageService } from './shared/services/localstorage.service';
+import { ThemeService } from './shared/services/theme.service';
 
 @Component({
     selector: 'app-root',
@@ -14,26 +15,12 @@ import { LocalStorageService } from './shared/services/localstorage.service';
     styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-    isLightTheme = false;
-
-    initTheme(): void {
-        const savedTheme = this.storage.getItem(this.environment.storage.theme);
-        this.isLightTheme = 'light' === savedTheme;
-        if (null !== savedTheme) {
-            this.updateTheme(savedTheme);
-
-            return;
-        }
-
-        let theme = 'light';
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            theme = 'dark';
-        }
-        this.updateTheme(theme);
+    isLightTheme(): boolean {
+        return ThemeService.isLight;
     }
 
     ngOnInit(): void {
-        this.initTheme();
+        this.theme.init();
         combineLatest([
             this.counter.categories(),
             this.counter.criteria(),
@@ -46,19 +33,13 @@ export class AppComponent implements OnInit {
     }
 
     toggleTheme(): void {
-        this.isLightTheme = !this.isLightTheme;
-        const theme = this.isLightTheme ? 'light' : 'dark';
-        this.updateTheme(theme);
-    }
-
-    updateTheme(theme: string): void {
-        document.querySelector('html').setAttribute('data-theme', theme);
-        this.storage.setItem(this.environment.storage.theme, theme);
+        this.theme.toggle();
     }
 
     constructor(
         private storage: LocalStorageService,
         private counter: CounterService,
+        public theme: ThemeService,
         @Inject(ENVIRONMENT) private environment: Environment,
     ) {
     }
