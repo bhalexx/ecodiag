@@ -7,4 +7,5 @@ export class Category {
     id: number;
     name: string;
     progression: number;
+    score: number;
 }

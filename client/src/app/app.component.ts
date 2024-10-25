@@ -1,6 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { combineLatest } from 'rxjs';
+import { ENVIRONMENT } from './environment/environment.config';
+import { Environment } from './environment/environment.model';
+import { CounterService } from './shared/services/counter.service';
 import { LocalStorageService } from './shared/services/localstorage.service';
+import { ThemeService } from './shared/services/theme.service';
 
 @Component({
     selector: 'app-root',
@@ -10,34 +15,32 @@ import { LocalStorageService } from './shared/services/localstorage.service';
     styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-    private storage = inject(LocalStorageService);
-    private themeStorageKey = 'ECO_theme';
-    isLightTheme = false;
+    isLightTheme(): boolean {
+        return ThemeService.isLight;
+    }
 
     ngOnInit(): void {
-        const savedTheme = this.storage.getItem(this.themeStorageKey);
-        this.isLightTheme = 'light' === savedTheme;
-        if (null !== savedTheme) {
-            this.updateTheme(savedTheme);
-
-            return;
-        }
-
-        let theme = 'light';
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            theme = 'dark';
-        }
-        this.updateTheme(theme);
+        this.theme.init();
+        combineLatest([
+            this.counter.categories(),
+            this.counter.criteria(),
+        ]).subscribe(
+            ([categories, criteria]) => {
+                this.storage.setItem(this.environment.storage.count.categories, JSON.stringify(categories));
+                this.storage.setItem(this.environment.storage.count.criteria, JSON.stringify(criteria));
+            },
+        );
     }
 
     toggleTheme(): void {
-        this.isLightTheme = !this.isLightTheme;
-        const theme = this.isLightTheme ? 'light' : 'dark';
-        this.updateTheme(theme);
+        this.theme.toggle();
     }
 
-    updateTheme(theme: string): void {
-        document.querySelector('html').setAttribute('data-theme', theme);
-        this.storage.setItem(this.themeStorageKey, theme);
+    constructor(
+        private storage: LocalStorageService,
+        private counter: CounterService,
+        public theme: ThemeService,
+        @Inject(ENVIRONMENT) private environment: Environment,
+    ) {
     }
 }
