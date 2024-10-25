@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use App\Repository\CriterionRepository;
 use App\Rest\ParamRequirements;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,9 +17,13 @@ class CategoryController extends AbstractController
     #[Route(path: '/list', name: 'list', methods: 'GET')]
     public function list(CategoryRepository $repository): JsonResponse
     {
-        $categories = $repository->findAll();
+        return $this->json($repository->findAll(), Response::HTTP_OK, [], ['groups' => 'categories.list']);
+    }
 
-        return $this->json($categories, Response::HTTP_OK, [], ['groups' => 'categories.list']);
+    #[Route(path: '/count', name: 'count', methods: 'GET')]
+    public function count(CategoryRepository $repository): JsonResponse
+    {
+        return $this->json($repository->count(), Response::HTTP_OK);
     }
 
     #[Route(path: '/{id}', name: 'category_get', requirements: ['id' => ParamRequirements::INTEGER], methods: 'GET')]
