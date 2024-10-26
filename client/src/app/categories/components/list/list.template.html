@@ -25,21 +25,19 @@
     @for (category of categories$|async; track category.id) {
         <article>
             <header>
-                <div class="grid grid-2">
-                    <span>{{ category.icon }} {{ category.name }}</span>
-                    @if (0 < category.progression) {
-                        <span>Conformité : <mark>{{ category.score|number: '1.0-0' }} %</mark></span>
-                    }
+                <div class="d-flex justify-between align-items-center">
+                    <h3 class="mb-0">{{ category.icon }} {{ category.name }}</h3>
+                    <a routerLink="/categorie/{{ category.id }}" role="button">Compléter</a>
                 </div>
             </header>
             @if (0 < category.progression) {
-                <small>Complétion :</small>
-                <progress [value]="category.progression" max="100"></progress>
+                <div class="grid grid-2">
+                    <p>Complétion : <mark>{{ category.progression|number: '1.0-0' }} %</mark></p>
+                    <p>Conformité : <mark>{{ category.score|number: '1.0-0' }} %</mark></p>
+                </div>
             }
             <p>{{ category.description }}</p>
-            <footer>
-                <a routerLink="/categorie/{{ category.id }}" role="button">Compléter</a>
-            </footer>
+
         </article>
     }
 </div>

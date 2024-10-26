@@ -1,6 +1,9 @@
 .pointer { cursor: pointer;}
 
 .d-flex { display: flex;}
+.justify-between { justify-content: space-between;}
+.align-items-center { align-items: center;}
+.mb-0 { margin-bottom: 0;}
 
 .grid-2 { grid-template-columns: repeat(2, 1fr);}
 .grid-3 { grid-template-columns: repeat(3, 1fr);}
