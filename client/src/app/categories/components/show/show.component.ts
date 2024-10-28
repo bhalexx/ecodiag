@@ -8,6 +8,7 @@ import { Environment } from '../../../environment/environment.model';
 import { CriteriaStatusComponent } from '../../../shared/components/criteria-status.component';
 import { AbstractFormBuilderComponent } from '../../../shared/components/form/abstract-form-builder.component';
 import { Category } from '../../../shared/model/category.model';
+import { CriterionStatus } from '../../../shared/model/criterion-status.model';
 import { Criterion } from '../../../shared/model/criterion.model';
 import { LocalStorageService } from '../../../shared/services/localstorage.service';
 import { ScoringService } from '../../../shared/services/scoring.service';
@@ -86,6 +87,15 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
                 this.saveChanges();
                 super.ngOnInit();
             }));
+    }
+
+    // Delete
+    forceCompletion(): void {
+        this.criteriaValues.forEach((criterion: CriterionValue) => {
+            criterion.status = CriterionStatus.COMPLIANT;
+            this.form.controls['criterion_' + criterion.id].setValue(criterion.status);
+        });
+        this.saveChanges();
     }
 
     ngOnInit(): void {

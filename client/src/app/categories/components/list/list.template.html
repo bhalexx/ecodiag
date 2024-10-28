@@ -1,14 +1,7 @@
 <p>Cet outil de diagnostic se base sur la version 2024 du Référentiel général d'écoconception de services numériques (RGESN) et en reprend donc les mêmes catégories.</p>
 
 @if (100 === globalProgression) {
-    <article>
-        <p>
-            <strong>🎉 Félicitations !</strong><br/>
-            Vous avez complété l'ensemble des catégories, et votre score s'élève à : <mark>{{ globalScore|number:'1.0-0' }} %</mark>.<br/>
-            Si vous le souhaitez, vous pouvez télécharger votre rapport.
-        </p>
-        <button (click)="export()">Télécharger mon rapport</button>
-    </article>
+    <report [score]="globalScore" [answers]="answers" />
 } @else {
     <article>
         <p>
@@ -16,7 +9,7 @@
                 <strong>Complétion</strong> :<br/>
                 <progress [value]="globalProgression" max="100"></progress>
             }
-            Il vous reste des catégories et critères à compléter, pour le moment votre score de conformité s'élève à : <mark>{{ globalScore|number:'1.0-0' }} %</mark>.
+            Il vous reste des catégories et critères à compléter, pour le moment votre niveau de conformité s'élève à : <mark>{{ globalScore|number:'1.0-0' }} %</mark>.
         </p>
     </article>
 }
@@ -25,21 +18,19 @@
     @for (category of categories$|async; track category.id) {
         <article>
             <header>
-                <div class="grid grid-2">
-                    <span>{{ category.icon }} {{ category.name }}</span>
-                    @if (0 < category.progression) {
-                        <span>Conformité : <mark>{{ category.score|number: '1.0-0' }} %</mark></span>
-                    }
+                <div class="d-flex justify-between align-items-center">
+                    <h3 class="mb-0">{{ category.icon }} {{ category.name }}</h3>
+                    <a routerLink="/categorie/{{ category.id }}" role="button">Compléter</a>
                 </div>
             </header>
             @if (0 < category.progression) {
-                <small>Complétion :</small>
-                <progress [value]="category.progression" max="100"></progress>
+                <div class="grid grid-2">
+                    <p>Complétion : <mark>{{ category.progression|number: '1.0-0' }} %</mark></p>
+                    <p>Conformité : <mark>{{ category.score|number: '1.0-0' }} %</mark></p>
+                </div>
             }
             <p>{{ category.description }}</p>
-            <footer>
-                <a routerLink="/categorie/{{ category.id }}" role="button">Compléter</a>
-            </footer>
+
         </article>
     }
 </div>
