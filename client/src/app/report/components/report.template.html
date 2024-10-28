@@ -1,0 +1,15 @@
+<article>
+    <p>
+        <strong>🎉 Félicitations !</strong><br/>
+        Vous avez complété l'ensemble des catégories, et votre score de conformité s'élève à : <mark>{{ score|number:'1.0-0' }} %</mark>.<br/>
+        Si vous le souhaitez, vous pouvez télécharger votre rapport.
+    </p>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <label for="website">
+            Nom de votre site
+            <input type="text" formControlName="website" id="website" placeholder="Nom de votre site" aria-label="Nom de votre site" required />
+        </label>
+        <small>Champ requis pour personnaliser votre rapport.</small>
+        <button type="submit" [attr.aria-busy]="loading" [disabled]="!form.valid" [attr.aria-disabled]="!form.valid">Valider et télécharger mon rapport</button>
+    </form>
+</article>

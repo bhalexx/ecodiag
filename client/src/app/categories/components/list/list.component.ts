@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { ENVIRONMENT } from '../../../environment/environment.config';
 import { Environment } from '../../../environment/environment.model';
+import { ReportComponent } from '../../../report/components/report.component';
 import { Category } from '../../../shared/model/category.model';
 import { USE_GENERIC_LIST_CACHE } from '../../../shared/services/api/abstract-list-service';
 import { LocalStorageService } from '../../../shared/services/localstorage.service';
@@ -18,6 +19,7 @@ import { CriterionValue } from '../show/show.component';
         RouterLink,
         AsyncPipe,
         DecimalPipe,
+        ReportComponent,
     ],
     providers: [
         CategoryListService,
@@ -25,12 +27,13 @@ import { CriterionValue } from '../show/show.component';
     ],
 })
 export class ListComponent implements OnInit {
+    answers: Array<CriterionValue> = [];
     categories$: Observable<Array<Category>>;
     globalProgression: number;
     globalScore: number;
 
-    export(): void {
-        console.log('export');
+    getCriteriaValue(category: number): Array<CriterionValue> {
+        return JSON.parse(this.storage.getItem(`${this.environment.storage.category}_${category}`));
     }
 
     ngOnInit(): void {
@@ -39,10 +42,16 @@ export class ListComponent implements OnInit {
                 this.globalProgression = 0;
                 this.globalScore = 0;
                 categories.forEach((category: Category): void => {
-                    category.progression = this.progress(category);
+                    category.progression = this.progress(category.id);
                     this.globalProgression += category.progression;
-                    category.score = this.score(category);
+
+                    category.score = this.score(category.id);
                     this.globalScore += category.score;
+
+                    const categoryAnswers = this.getCriteriaValue(category.id);
+                    if (null !== categoryAnswers) {
+                        this.answers.push(...categoryAnswers);
+                    }
                 });
 
                 this.globalProgression = (this.globalProgression / (categories.length * 100)) * 100;
@@ -50,8 +59,8 @@ export class ListComponent implements OnInit {
             }));
     }
 
-    progress(category: Category): number {
-        const criteriaValues = JSON.parse(this.storage.getItem(`${this.environment.storage.category}_${category.id}`));
+    progress(category: number): number {
+        const criteriaValues = this.getCriteriaValue(category);
 
         if (null === criteriaValues) {
             return 0;
@@ -61,10 +70,8 @@ export class ListComponent implements OnInit {
             null !== criterionValue.status).length / criteriaValues.length * 100;
     }
 
-    score(category: Category): number {
-        const criteriaValues = JSON.parse(this.storage.getItem(`${this.environment.storage.category}_${category.id}`));
-
-        return this.scoring.compute(criteriaValues);
+    score(category: number): number {
+        return this.scoring.compute(this.getCriteriaValue(category));
     }
 
     constructor(

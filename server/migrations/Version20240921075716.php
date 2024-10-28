@@ -23,6 +23,7 @@ final class Version20240921075716 extends AbstractMigration
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, icon VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('CREATE TABLE criterion (id INT AUTO_INCREMENT NOT NULL, label LONGTEXT NOT NULL, purpose LONGTEXT NOT NULL, implementation LONGTEXT NOT NULL, testing LONGTEXT NOT NULL, number VARCHAR(5) NOT NULL, category_id INT NOT NULL, INDEX IDX_7C82227112469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
         $this->addSql('ALTER TABLE criterion ADD CONSTRAINT FK_7C82227112469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
+        $this->addSql('CREATE TABLE report (id INT AUTO_INCREMENT NOT NULL, website VARCHAR(255) NOT NULL, criteria JSON NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci`');
     }
 
     public function postUp(Schema $schema): void
@@ -59,6 +60,7 @@ final class Version20240921075716 extends AbstractMigration
         $this->addSql('ALTER TABLE criterion DROP FOREIGN KEY FK_7C82227112469DE2');
         $this->addSql('DROP TABLE category');
         $this->addSql('DROP TABLE criterion');
+        $this->addSql('DROP TABLE report');
     }
 
     private function insertCategories(): void {

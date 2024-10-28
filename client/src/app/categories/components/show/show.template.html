@@ -7,6 +7,9 @@
     Progression :
     <progress [value]="progress" max="100"></progress>
 
+    <!-- Delete -->
+    <button (click)="forceCompletion()">Compléter</button>
+
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         @for (criterion of category.criteria; track $index) {
             <article>
