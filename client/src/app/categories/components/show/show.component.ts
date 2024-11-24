@@ -89,15 +89,6 @@ export class ShowComponent extends AbstractFormBuilderComponent implements OnIni
             }));
     }
 
-    // Delete
-    forceCompletion(): void {
-        this.criteriaValues.forEach((criterion: CriterionValue) => {
-            criterion.status = CriterionStatus.COMPLIANT;
-            this.form.controls['criterion_' + criterion.id].setValue(criterion.status);
-        });
-        this.saveChanges();
-    }
-
     ngOnInit(): void {
         this.fetch();
 
