@@ -6,10 +6,13 @@
     </p>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <label for="website">
-            Nom de votre site
-            <input type="text" formControlName="website" id="website" placeholder="Nom de votre site" aria-label="Nom de votre site" required />
+            Nom du site évalué
+            <input type="text" formControlName="website" id="website" placeholder="Nom du site évalué" aria-label="Nom du site évalué" required />
+            <small>Champ requis pour personnaliser votre rapport.</small>
         </label>
-        <small>Champ requis pour personnaliser votre rapport.</small>
-        <button type="submit" [attr.aria-busy]="loading" [disabled]="!form.valid" [attr.aria-disabled]="!form.valid">Valider et télécharger mon rapport</button>
+        <div class="grid">
+            <button type="submit" [attr.aria-busy]="loading" [disabled]="!form.valid" [attr.aria-disabled]="!form.valid">Valider et télécharger mon rapport</button>
+            <button type="button" class="grid danger" [attr.aria-busy]="loading" [disabled]="loading" [attr.aria-disabled]="loading" (click)="onReset()">Réinitialiser</button>
+        </div>
     </form>
 </article>

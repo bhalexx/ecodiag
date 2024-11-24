@@ -2,15 +2,15 @@
     <h1>{{ category.icon }}{{ category.name }}</h1>
     <p>{{ category.description }}</p>
 
-    <ng-template [ngTemplateOutlet]="buttonsTpl" />
-
-    Progression :
-    <progress [value]="progress" max="100"></progress>
-
-    <!-- Delete -->
-    <button (click)="forceCompletion()">Compléter</button>
-
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ng-template [ngTemplateOutlet]="buttonsTpl" />
+
+        Progression :
+        <progress [value]="progress" max="100"></progress>
+
+        <!-- To delete -->
+        <button type="button" (click)="forceCompletion()">Compléter</button>
+
         @for (criterion of category.criteria; track $index) {
             <article>
                 <header>

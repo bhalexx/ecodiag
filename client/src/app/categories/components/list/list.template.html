@@ -1,8 +1,8 @@
 <p>Cet outil de diagnostic se base sur la version 2024 du Référentiel général d'écoconception de services numériques (RGESN) et en reprend donc les mêmes catégories.</p>
 
 @if (100 === globalProgression) {
-    <report [score]="globalScore" [answers]="answers" />
-} @else {
+    <report [score]="globalScore" [answers]="answers" (formReset)="reset()" />
+} @else if (0 < globalProgression) {
     <article>
         <p>
             @if (globalProgression) {
@@ -11,6 +11,11 @@
             }
             Il vous reste des catégories et critères à compléter, pour le moment votre niveau de conformité s'élève à : <mark>{{ globalScore|number:'1.0-0' }} %</mark>.
         </p>
+        <button type="button" class="danger" (click)="reset()">Réinitialiser</button>
+    </article>
+} @else {
+    <article>
+        Pour le projet évalué, renseignez votre conformité pour chacune des catégories ci-dessous.
     </article>
 }
 
