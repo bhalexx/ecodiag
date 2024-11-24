@@ -1,0 +1,28 @@
+html, body {
+    font-size: 1rem;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: .5rem;
+    border: 1px solid grey;
+    text-align: left;
+}
+
+.page-break {
+    page-break-after: always;
+}
+
+.success {
+    color: #A3BE8C;
+}
+.warning {
+    color: #EBCB8B;
+}
+.danger {
+    color: #BF616A;
+}

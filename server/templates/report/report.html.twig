@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>🌱 Ecodiag - Rapport de diagnostic d'écoconception</h1>
+    <h2>{{ 'now'|date('d/m/Y') }} - {{ report.website }}</h2>
+    <p>Cet outil de diagnostic se base sur la version 2024 du Référentiel général d'écoconception de services numériques (RGESN) et en reprend donc les mêmes catégories.</p>
+
+    <h2>Vue d'ensemble</h2>
+    <table style="width: 100%;">
+        <tbody>
+        {% for category in report.categories %}
+            <tr>
+                <td>{{ category.category.name|upper }}</td>
+                <td><strong>{% include 'report/_score.html.twig' with { 'score': category.score } %}</strong></td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td><strong>SCORE GLOBAL</strong></td>
+            <td style="width: 120px;"><strong>{% include 'report/_score.html.twig' with { 'score': report.score } %}</strong></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p style="margin-top: 1rem; margin-bottom: 0;">
+        <small>N'imprimez ce document que si nécessaire, et, le cas échéant, pensez à configurer l'impression en noir et blanc et en recto-verso.</small>
+    </p>
+
+    {% for category in report.categories %}
+        <div class="page-break"></div>
+        <h2>{{ category.category.icon }} {{ category.category.name|upper }} - {% include 'report/_score.html.twig' with { 'score': category.score } %}</h2>
+        <p>{{ category.category.description }}</p>
+
+        <table>
+            <tbody>
+            {% for criterion in category.criteria %}
+                <tr>
+                    <td>{{ category.category.id }}.{{ loop.index }} {{ criterion.criterion.label|raw }}</td>
+                    <td style="width: 120px;" class="{{ criterion.status.color }}"><strong>{{ criterion.status.label }}</strong></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+    <p style="margin-top: 4rem;">
+        <small>N'imprimez ce document que si nécessaire, et, le cas échéant, pensez à configurer l'impression en noir et blanc et en recto-verso.</small>
+    </p>
+{% endblock %}

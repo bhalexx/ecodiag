@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Report;
+use App\Report\Builder;
 use App\Repository\CriterionRepository;
+use App\Service\PdfGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -26,7 +29,7 @@ class ReportController extends AbstractController
         try {
             $report = $serializer->deserialize($request->getContent(), Report::class, 'json');
             if ($criterionRepository->count() !== \count($report->getCriteria())) {
-                // throw error
+                throw new BadRequestHttpException('Le nombre de critères n\'est pas correct.');
             }
             $entityManager->persist($report);
             $entityManager->flush();
@@ -37,9 +40,18 @@ class ReportController extends AbstractController
         }
     }
 
-    #[Route(path: '/export/{report}', name: 'export', methods: 'HEAD')]
-    public function export(Report $report)
-    {
-        return new JsonResponse($report, Response::HTTP_OK);
+    #[Route(path: '/export/{report}', name: 'export', methods: 'GET')]
+    public function export(
+        Report $report,
+        Builder $builder,
+        PdfGenerator $exporter,
+    ): Response {
+        return new Response(
+            $exporter->output($this->renderView('report/report.html.twig', [
+                'report' => $builder->build($report),
+            ])),
+            Response::HTTP_OK,
+            ['Content-Type' => 'application/pdf'],
+        );
     }
 }

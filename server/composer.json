@@ -9,6 +9,7 @@
         "ext-iconv": "*",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.2",
+        "nucleos/dompdf-bundle": "^4.3",
         "symfony/console": "7.1.*",
         "symfony/dotenv": "7.1.*",
         "symfony/flex": "^2",

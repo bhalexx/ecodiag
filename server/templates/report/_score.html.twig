@@ -1,0 +1,5 @@
+{% set color = 'danger' %}
+{% if score >= 50 and score < 80 %}{% set color = "warning" %}{% endif %}
+{% if score >= 80 %}{% set color = "success" %}{% endif %}
+
+<span class="{{ color }}">{{ score|number_format(2) }} %</span>

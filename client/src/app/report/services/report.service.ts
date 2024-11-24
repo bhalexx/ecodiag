@@ -8,7 +8,7 @@ export class ReportService {
     private endpoint: string;
 
     export(id: number): Observable<void> {
-        return this.http.head(`${this.endpoint}/export/${id}`).pipe(take(1)) as Observable<void>;
+        return this.http.get(`${this.endpoint}/export/${id}`).pipe(take(1)) as Observable<void>;
     }
 
     validate(data: { criteria: Array<CriterionValue>; website: string; }): Observable<number> {
