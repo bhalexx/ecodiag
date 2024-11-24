@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>🌱 Ecodiag - Rapport de diagnostic d'écoconception</h1>
+    <h1>Ecodiag - Rapport de diagnostic d'écoconception</h1>
     <h2>{{ 'now'|date('d/m/Y') }} - {{ report.website }}</h2>
     <p>Cet outil de diagnostic se base sur la version 2024 du Référentiel général d'écoconception de services numériques (RGESN) et en reprend donc les mêmes catégories.</p>
 
@@ -27,7 +27,7 @@
 
     {% for category in report.categories %}
         <div class="page-break"></div>
-        <h2>{{ category.category.icon }} {{ category.category.name|upper }} - {% include 'report/_score.html.twig' with { 'score': category.score } %}</h2>
+        <h2>{{ category.category.name|upper }} - {% include 'report/_score.html.twig' with { 'score': category.score } %}</h2>
         <p>{{ category.category.description }}</p>
 
         <table>
