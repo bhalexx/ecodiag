@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { finalize, switchMap } from 'rxjs';
 import { CriterionValue } from '../../categories/components/show/show.component';
@@ -23,7 +23,12 @@ import { ReportService } from '../services/report.service';
 export class ReportComponent extends AbstractFormBuilderComponent implements OnInit {
     @Input({required: true}) score: number;
     @Input({required: true}) answers: Array<CriterionValue>;
+    @Output() formReset: EventEmitter<void> = new EventEmitter<void>();
     loading = false;
+
+    onReset(): void {
+        this.formReset.emit();
+    }
 
     onSubmit(): void {
         this.loading = true;

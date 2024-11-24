@@ -1,0 +1,15 @@
+footer {
+    .container {
+        margin-top: 2rem; margin-bottom: 2rem;
+        padding-top: 2rem;
+        border-top: var(--pico-border-width) solid var(--pico-muted-border-color);
+
+        p {
+            span:first-of-type {
+                display: block;
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}

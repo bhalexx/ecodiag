@@ -16,7 +16,7 @@
 
     // Muted colors
     #{$css-var-prefix}muted-color: #{$nord3};
-    #{$css-var-prefix}muted-border-color: #{mix($nord5, $nord6)};
+    #{$css-var-prefix}muted-border-color: #{$nord5};
 
     // Primary colors
     #{$css-var-prefix}primary: #{$nord7};

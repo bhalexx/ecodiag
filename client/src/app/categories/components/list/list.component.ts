@@ -1,7 +1,7 @@
 import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { delay, Observable, tap } from 'rxjs';
 import { ENVIRONMENT } from '../../../environment/environment.config';
 import { Environment } from '../../../environment/environment.model';
 import { ReportComponent } from '../../../report/components/report.component';
@@ -37,26 +37,7 @@ export class ListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.categories$ = this.service.getList()
-            .pipe(tap((categories: Array<Category>): void => {
-                this.globalProgression = 0;
-                this.globalScore = 0;
-                categories.forEach((category: Category): void => {
-                    category.progression = this.progress(category.id);
-                    this.globalProgression += category.progression;
-
-                    category.score = this.score(category.id);
-                    this.globalScore += category.score;
-
-                    const categoryAnswers = this.getCriteriaValue(category.id);
-                    if (null !== categoryAnswers) {
-                        this.answers.push(...categoryAnswers);
-                    }
-                });
-
-                this.globalProgression = (this.globalProgression / (categories.length * 100)) * 100;
-                this.globalScore = (this.globalScore / (categories.length * 100)) * 100;
-            }));
+        this.updateList();
     }
 
     progress(category: number): number {
@@ -70,8 +51,42 @@ export class ListComponent implements OnInit {
             null !== criterionValue.status).length / criteriaValues.length * 100;
     }
 
+    reset(): void {
+        for (let i = 1; i <= parseInt(this.storage.getItem(this.environment.storage.count.categories));) {
+            this.storage.removeItem(`${this.environment.storage.category}_${i}`);
+            ++i;
+        }
+        this.updateList();
+    }
+
     score(category: number): number {
         return this.scoring.compute(this.getCriteriaValue(category));
+    }
+
+    private updateList(): void {
+        this.categories$ = this.service.getList()
+            .pipe(
+                delay(50),
+                tap((categories: Array<Category>): void => {
+                    this.globalProgression = 0;
+                    this.globalScore = 0;
+                    categories.forEach((category: Category): void => {
+                        category.progression = this.progress(category.id);
+                        this.globalProgression += category.progression;
+
+                        category.score = this.score(category.id);
+                        this.globalScore += category.score;
+
+                        const categoryAnswers = this.getCriteriaValue(category.id);
+                        if (null !== categoryAnswers) {
+                            this.answers.push(...categoryAnswers);
+                        }
+                    });
+
+                    this.globalProgression = (this.globalProgression / (categories.length * 100)) * 100;
+                    this.globalScore = (this.globalScore / (categories.length * 100)) * 100;
+                }),
+            );
     }
 
     constructor(

@@ -3,7 +3,7 @@ import { Environment } from './environment.model';
 export const environment: Environment = {
     name: 'production',
     storage: {
-        category: 'ECO_cat_',
+        category: 'ECO_cat',
         count: {
             categories: 'ECO_cat_count',
             criteria: 'ECO_cri_count',
