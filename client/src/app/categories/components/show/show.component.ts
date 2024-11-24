@@ -8,7 +8,6 @@ import { Environment } from '../../../environment/environment.model';
 import { CriteriaStatusComponent } from '../../../shared/components/criteria-status.component';
 import { AbstractFormBuilderComponent } from '../../../shared/components/form/abstract-form-builder.component';
 import { Category } from '../../../shared/model/category.model';
-import { CriterionStatus } from '../../../shared/model/criterion-status.model';
 import { Criterion } from '../../../shared/model/criterion.model';
 import { LocalStorageService } from '../../../shared/services/localstorage.service';
 import { ScoringService } from '../../../shared/services/scoring.service';
